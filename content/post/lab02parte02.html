@@ -90,7 +90,7 @@
         .attr("transform", "translate(-30," + (alturaVis + margin.top)/2 + ") rotate(-90)")
         .text("Volume (%)");
     }
-    var dados = "dados/boqueirao-por-mes.json";
+    var dados = "boqueirao-por-mes.json";
     d3.json(dados, function(dados) {
       desenhaGrafico(dados);
     });
