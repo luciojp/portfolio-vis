@@ -1,12 +1,3 @@
----
-title: "Lab02 Parte 02"
-date: 2017-11-29T20:40:36-03:00
-draft: false
----
-
-Lab02 parte 02:
-<!--more-->
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -42,24 +33,22 @@ Lab02 parte 02:
   <script type="text/javascript">
     "use strict"
     function desenhaBarras(dados) {
-     // definicoes de altura e largura do svg e da vis dentro
+     
       var alturaSVG = 400, larguraSVG = 900;
-      var	margin = {top: 10, right: 20, bottom:30, left: 45}, // para descolar a vis das bordas do grafico
+      var	margin = {top: 10, right: 20, bottom:30, left: 45}, 
           larguraVis = larguraSVG - margin.left - margin.right,
           alturaVis = alturaSVG - margin.top - margin.bottom;
-      /*
-       * Prepara onde adicionaremos a visualizacao
-       */
-      var grafico = d3.select('#chart') // cria elemento <svg> com um <g> dentro
+      
+
+      var grafico = d3.select('#chart') 
         .append('svg')
           .attr('width', larguraVis + margin.left + margin.right)
           .attr('height', alturaVis + margin.top + margin.bottom)
-        .append('g') // para entender o <g> vá em x03-detalhes-svg.html
+        .append('g') 
           .attr('transform', 'translate(' +  margin.left + ',' + margin.top + ')');
-      // === EDITE DAQUI ===
-      /*
-       * As escalas
-       */
+      
+      
+
       var maxAltura = d3.max(dados, (d, i) => d.VolumePercentual) + 10;
       var x = d3.scaleBand()
                 .domain(dados.map(function(d) { return d.DataInformacao.substring(6,10); }))
@@ -68,28 +57,26 @@ Lab02 parte 02:
       var y = d3.scaleLinear()
                 .domain([0, maxAltura])
                 .range([alturaVis,0]);
-      // === ATÉ DAQUI ===
-      /*
-       * As marcas
-       */
+      
+      
+
       grafico.selectAll('g')
               .data(dados)
               .enter()
                 .append('rect')
-                  .attr('x', d => x(d.DataInformacao.substring(6,10)))   // usando a escala definida acima
-                  .attr('width', x.bandwidth()) // largura da barra via escala
+                  .attr('x', d => x(d.DataInformacao.substring(6,10)))   
+                  .attr('width', x.bandwidth()) 
                   .attr('y', d => y(d.VolumePercentual))
-                  .attr('height', (d) => alturaVis - y(d.VolumePercentual)); // de cabeca para baixo
-      /*
-       * Os eixos
-       */
+                  .attr('height', (d) => alturaVis - y(d.VolumePercentual)); 
+      
+
       grafico.append("g")
               .attr("class", "x axis")
               .attr("transform", "translate(0," + alturaVis + ")")
-              .call(d3.axisBottom(x)); // magica do d3: gera eixo a partir da escala
+              .call(d3.axisBottom(x)); 
       grafico.append('g')
               .attr('transform', 'translate(0,0)')
-              .call(d3.axisLeft(y))  // gera eixo a partir da escala
+              .call(d3.axisLeft(y))  
       grafico.append("text")
         .attr("transform", "translate(-30," + (alturaVis + margin.top)/2 + ") rotate(-90)")
         .text("Volume (%)");
@@ -102,4 +89,3 @@ Lab02 parte 02:
 </body>
 
 </html>
-

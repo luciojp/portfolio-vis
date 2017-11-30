@@ -6,20 +6,10 @@
     <description>Recent content in Posts on Lucio portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-BR</language>
-    <lastBuildDate>Wed, 29 Nov 2017 20:40:36 -0300</lastBuildDate>
+    <lastBuildDate>Wed, 29 Nov 2017 20:40:30 -0300</lastBuildDate>
     
 	<atom:link href="https://luciojp.github.io/portfolio-vis/post/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Lab02 Parte 02</title>
-      <link>https://luciojp.github.io/portfolio-vis/post/quarto-post/</link>
-      <pubDate>Wed, 29 Nov 2017 20:40:36 -0300</pubDate>
-      
-      <guid>https://luciojp.github.io/portfolio-vis/post/quarto-post/</guid>
-      <description>&lt;p&gt;Lab02 parte 02:
-&lt;/p&gt;</description>
-    </item>
     
     <item>
       <title>Eh possivel observar alguma semelhanca no nivel das aguas de boqueirao no mes de junho?</title>
@@ -49,6 +39,15 @@
       <guid>https://luciojp.github.io/portfolio-vis/post/primeiro-post/</guid>
       <description>De tempos em tempos o nordeste passa por um grave problema, a seca. Sao anos de estiagem que afetam milhoes de pessoas e animais. Durante essa epoca, alguns acudes chagam ao ponto de secarem completamente ou ficarem bem proximos disso, que foi o caso do acude de boqueirao, que abastece 7 cidades da Paraiba.
 E baseado nisso, farei algumas analises sobre o nivel das aguas deste acude.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://luciojp.github.io/portfolio-vis/post/lab02parte02/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciojp.github.io/portfolio-vis/post/lab02parte02/</guid>
+      <description>Barras simplesBarras com dados vindos de uma url.mychart rect {fill: purple;}.mychart rect:hover {fill: pink;}.mychart text {font: 12px sans-serif;text-anchor: left;}&#34;use strict&#34;function desenhaBarras(dados) {// definicoes de altura e largura do svg e da vis dentrovar alturaSVG = 400, larguraSVG = 900;var	margin = {top: 10, right: 20, bottom:30, left: 45}, // para descolar a vis das bordas do graficolarguraVis = larguraSVG - margin.</description>
     </item>
     
   </channel>
