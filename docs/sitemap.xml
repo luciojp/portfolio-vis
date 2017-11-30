@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://localhost:1313/post/quarto-post/</loc>
+    <lastmod>2017-11-29T20:40:36-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/terceiro-post/</loc>
+    <lastmod>2017-11-29T20:40:30-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/segundo-post/</loc>
+    <lastmod>2017-11-29T20:40:24-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/primeiro-post/</loc>
+    <lastmod>2017-11-29T20:37:16-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2017-11-29T20:40:36-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/</loc>
+    <lastmod>2017-11-29T20:40:36-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+</urlset>
