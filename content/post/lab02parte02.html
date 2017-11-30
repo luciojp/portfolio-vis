@@ -11,18 +11,18 @@
 <body>
   <div class="container">
     <div class="row">
-      <h2>Barras com dados vindos de uma url</h2>
+      <h2>Volume máximo e mínimo do Açude Epitácio Pessoa, por mês</h2>
     </div>
     <div class="row mychart" id="chart">
     </div>
   </div>
 
   <style>
-    .mychart rect {
-      fill: purple;
+    .mychart circle {
+      fill: yellow;
     }
-    .mychart rect:hover {
-      fill: pink;
+    .mychart circle:hover {
+      fill: lemonchiffon;
     }
     .mychart text {
       font: 12px sans-serif;
@@ -32,10 +32,10 @@
 
   <script type="text/javascript">
     "use strict"
-    function desenhaBarras(dados) {
+    function desenhaGrafico(dados) {
      // definicoes de altura e largura do svg e da vis dentro
-      var alturaSVG = 400, larguraSVG = 900;
-      var	margin = {top: 10, right: 20, bottom:30, left: 45}, // para descolar a vis das bordas do grafico
+      var alturaSVG = 600, larguraSVG = 2000;
+      var	margin = {top: 10, right: 20, bottom:30, left: 100}, // para descolar a vis das bordas do grafico
           larguraVis = larguraSVG - margin.left - margin.right,
           alturaVis = alturaSVG - margin.top - margin.bottom;
       /*
@@ -45,33 +45,38 @@
         .append('svg')
           .attr('width', larguraVis + margin.left + margin.right)
           .attr('height', alturaVis + margin.top + margin.bottom)
-        .append('g') // para entender o <g> v� em x03-detalhes-svg.html
+        .append('g') // para entender o <g> v� em x03-detalhes-svg.html
           .attr('transform', 'translate(' +  margin.left + ',' + margin.top + ')');
-      // === EDITE DAQUI ===
       /*
        * As escalas
        */
-      var maxAltura = d3.max(dados, (d, i) => d.VolumePercentual) + 10;
+      var maxAltura = d3.max(dados, (d, i) => d.noventa_percentil) + 10;
       var x = d3.scaleBand()
-                .domain(dados.map(function(d) { return d.DataInformacao.substring(6,10); }))
+                .domain(dados.map(function(d) { return d.mes; }))
                 .range([0,larguraVis])
-                .padding(.3);
+                .padding(.10);
       var y = d3.scaleLinear()
-                .domain([0, maxAltura])
+                .domain([60, maxAltura])
                 .range([alturaVis,0]);
-      // === AT� DAQUI ===
       /*
        * As marcas
        */
       grafico.selectAll('g')
               .data(dados)
               .enter()
-                .append('rect')
-                  .attr('x', d => x(d.DataInformacao.substring(6,10)))   // usando a escala definida acima
-                  .attr('width', x.bandwidth()) // largura da barra via escala
-                  .attr('y', d => y(d.VolumePercentual))
-                  .attr('height', (d) => alturaVis - y(d.VolumePercentual)); // de cabeca para baixo
-      /*
+                .append('circle')
+                  .attr('r', d => d.noventa_percentil)
+                  .attr('cx', d => x(d.mes))
+                  .attr('cy', d => y(d.noventa_percentil));
+     grafico.selectAll('g')
+          .data(dados)
+          .enter()
+          .append('circle')
+          .attr('r', d => d.dez_percentil)
+          .attr('cx', d => x(d.mes))
+          .attr('cy', d => y(d.noventa_percentil))
+          .style('fill', '#3393FF');
+       /*
        * Os eixos
        */
       grafico.append("g")
@@ -85,9 +90,9 @@
         .attr("transform", "translate(-30," + (alturaVis + margin.top)/2 + ") rotate(-90)")
         .text("Volume (%)");
     }
-    var dadosURL = "https://api.insa.gov.br/reservatorios/12172/monitoramento";
-    d3.json(dadosURL, function(dados) {
-      desenhaBarras(dados.volumes);
+    var dados = "dados/boqueirao-por-mes.json";
+    d3.json(dados, function(dados) {
+      desenhaGrafico(dados);
     });
   </script>
 </body>
