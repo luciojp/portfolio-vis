@@ -1,4 +1,4 @@
-baseURL = "http://localhost:1313"
+baseURL = "https://luciojp.github.io/portfolio-vis/"
 languageCode =  "pt-BR"
 title = "Lucio portfolio"
 theme = "hugo-nuo"
