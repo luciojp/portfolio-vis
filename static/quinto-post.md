@@ -1,0 +1,116 @@
+---
+title: "Quinto Post"
+date: 2018-02-22T00:10:16-03:00
+---
+
+<meta charset="utf-8">
+<style>
+
+.cidades {
+  fill: none;
+  stroke: #fff;
+  stroke-linejoin: round;
+}
+
+path:hover, path.highlighted {
+  fill: tomato;
+}
+
+div.tooltip {
+  position: absolute;
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+  font-family:"avenir next", Arial, sans-serif;
+  padding: 4px 8px;
+  display: none;
+}
+
+</style>
+
+<svg width="1000" height="600"></svg>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="https://d3js.org/topojson.v2.min.js"></script>
+<script src="../content/legenda-d3-cor.js"></script>
+<script>
+
+var svg = d3.select("svg"),
+    width = +svg.attr("width"),
+    height = +svg.attr("height");
+
+var path = d3.geoPath();
+
+// a escala de cores
+var color = d3.scaleThreshold()
+      .domain([-33, -22, -11, -5, 0, 5, 11, 22, 33, 44, 55])
+      .range(d3.schemeRdBu[11]);
+
+// função aux definida em legenda-d3-cor.js
+desenhaLegenda(-33, 55, color, "Crescimento entre 2011 e 2013 (pp*)")
+
+d3.queue()
+    .defer(d3.json, "../geo4-municipios-e-aprendizado-simplificado.json")
+    .await(ready);
+
+function ready(error, dados) {
+  if (error) throw error;
+
+  var cidades = dados.features;
+
+  svg.append("g")
+      .attr("class", "cidades")
+    .selectAll("path")
+    .data(cidades)
+    .enter()
+    .append("path")
+      .attr("fill", d => {valor = d.properties["Crescimento entre 2011 e 2013 (pp*)"]; return valor === "NA" ? '#e0e0eb' : color(valor)})
+      .attr("d", path)
+      .on("mouseover",showTooltip)
+      .on("mousemove",moveTooltip)
+      .on("mouseout",hideTooltip)
+}
+
+// ZOOM
+
+//create zoom handler
+var zoom_handler = d3.zoom()
+    .on("zoom", zoom_actions);
+
+//specify what to do when zoom event listener is triggered
+function zoom_actions(){
+ d3.selectAll("path").attr("transform", d3.event.transform);
+}
+
+//add zoom behaviour to the svg element
+//same as svg.call(zoom_handler);
+zoom_handler(svg);
+
+
+// TOOLTIP
+
+//Create a tooltip, hidden at the start
+var tooltip = d3.select("body").append("div").attr("class","tooltip");
+//Position of the tooltip relative to the cursor
+var tooltipOffset = {x: 5, y: -25};
+
+function showTooltip(d) {
+  moveTooltip();
+
+  tooltip.style("display","block")
+      .text(d.properties.Cidade + ": " + d.properties["Crescimento entre 2011 e 2013 (pp*)"]);
+}
+
+//Move the tooltip to track the mouse
+function moveTooltip() {
+  tooltip.style("top",(d3.event.pageY+tooltipOffset.y)+"px")
+      .style("left",(d3.event.pageX+tooltipOffset.x)+"px");
+}
+
+//Create a tooltip, hidden at the start
+function hideTooltip() {
+  tooltip.style("display","none");
+}
+
+</script>
